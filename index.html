@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
       <div>
         <h1>Winter Arc Habit Tracker</h1>
         <div class="small" id="dayLabel"></div>
-        <div class="small">Check-ins: <span id="checkins"></span></div>
+        <div class="small">Check-ins: <span id="checkinsDisplay"></span></div>
       </div>
       <div class="row">
         <button class="btn" id="openSettings">Settings</button>
@@ -99,7 +100,7 @@
         </div>
         <div>
           <div class="small">Check-in times (comma separated)</div>
-          <input id="checkins" type="text">
+          <input id="checkinsInput" type="text">
         </div>
         <label class="row"><input id="triState" type="checkbox"> <span>Use partial credit (0.5)</span></label>
         <label class="row"><input id="reminders" type="checkbox"> <span>Device notifications</span></label>
