@@ -1,8 +1,7 @@
 {
-  "name": "Winter Arc Habit Tracker",
-  "short_name": "Winter Arc",
-  "start_url": "/winter-arc-tracker/",
-  "scope": "/winter-arc-tracker/",
+  "name": "Winter Arc Habit Tracker (Debug)",
+  "short_name": "Winter Arc D",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#0f172a",

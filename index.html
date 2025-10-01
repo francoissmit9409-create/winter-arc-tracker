@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Winter Arc Habit Tracker</title>
+  <title>Winter Arc Habit Tracker (Debug)</title>
   <meta name="theme-color" content="#0f172a">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icon-192.png">
@@ -15,9 +15,10 @@
   <div class="container">
     <header class="grid" style="gap:8px; grid-template-columns: 1fr auto;">
       <div>
-        <h1>Winter Arc Habit Tracker</h1>
-        <div class="small" id="dayLabel"></div>
+        <h1>Winter Arc Habit Tracker (Debug)</h1>
         <div class="small">Check-ins: <span id="checkinsDisplay"></span></div>
+        <div class="version">version <span id="version"></span></div>
+        <div id="log"></div>
       </div>
       <div class="row">
         <button class="btn" id="openSettings">Settings</button>
@@ -43,6 +44,8 @@
       </div>
     </section>
 
+    <div class="small" id="dayLabel">Day</div>
+
     <section class="card">
       <div class="row" style="justify-content: space-between; margin-bottom:8px;">
         <div style="font-weight:600">Today's habits</div>
@@ -59,17 +62,14 @@
           <button class="btn primary" id="saveWeight">Save</button>
         </div>
         <input id="weight" type="text" placeholder="kg">
-        <div class="small" style="margin-top:6px;">Goal: -5 kg from 105.6 kg.</div>
       </div>
       <div class="card">
         <div style="font-weight:600">Calories</div>
         <input id="calories" type="number" placeholder="kcal">
-        <div class="small" style="margin-top:6px;">Track in CalAI, paste calories here for history.</div>
       </div>
       <div class="card">
         <div style="font-weight:600">Social minutes</div>
         <input id="social" type="number" placeholder="mins">
-        <div class="small" style="margin-top:6px;">Cap is 30 mins after day 30.</div>
       </div>
     </section>
 
@@ -78,16 +78,8 @@
       <textarea id="notes" placeholder="How did today go?"></textarea>
     </section>
 
-    <section class="card" style="margin-top:12px;">
-      <div style="font-weight:600; margin-bottom:6px;">Streaks</div>
-      <div id="streakGrid" class="grid" style="grid-template-columns: repeat(2, 1fr);"></div>
-    </section>
-
-    <div class="footer">Built for your Winter Arc. Tip: Add to Home Screen on your phone for quick access.</div>
-  </div>
-
-  <!-- Settings modal -->
-  <div id="settingsModal" class="container hidden" style="position:fixed; inset:0; display:grid; place-items:center; background: rgba(0,0,0,.25);">
+    <!-- Settings overlay -->
+  <div id="settingsOverlay" class="overlay hidden">
     <div class="modal" style="width: 92%; max-width: 560px;">
       <div class="row" style="justify-content: space-between; margin-bottom:10px;">
         <div style="font-weight:600">Settings</div>
@@ -100,7 +92,7 @@
         </div>
         <div>
           <div class="small">Check-in times (comma separated)</div>
-          <input id="checkinsInput" type="text">
+          <input id="checkinsInput" type="text" placeholder="08:00,13:00,20:00">
         </div>
         <label class="row"><input id="triState" type="checkbox"> <span>Use partial credit (0.5)</span></label>
         <label class="row"><input id="reminders" type="checkbox"> <span>Device notifications</span></label>
