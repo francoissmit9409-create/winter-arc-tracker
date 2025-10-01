@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Winter Arc Habit Tracker</title>
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="grid" style="gap:8px; grid-template-columns: 1fr auto;">
+      <div>
+        <h1>Winter Arc Habit Tracker</h1>
+        <div class="small" id="dayLabel"></div>
+        <div class="small">Check-ins: <span id="checkins"></span></div>
+      </div>
+      <div class="row">
+        <button class="btn" id="openSettings">Settings</button>
+      </div>
+    </header>
+
+    <section class="grid grid-3" style="margin:12px 0;">
+      <div class="card">
+        <div class="small">Date</div>
+        <input type="date" id="dateInput">
+      </div>
+      <div class="card">
+        <div class="small">Progress</div>
+        <div id="progressText" style="font-weight:600">0/0 • 0%</div>
+        <div class="progress" style="margin-top:8px;"><div id="progressBar"></div></div>
+      </div>
+      <div class="card row" style="justify-content: space-between;">
+        <button class="btn primary" id="resetDay">Reset day</button>
+        <div class="row">
+          <button class="btn" id="exportData">Export</button>
+          <label class="btn">Import<input id="importData" type="file" accept="application/json" style="display:none"></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row" style="justify-content: space-between; margin-bottom:8px;">
+        <div style="font-weight:600">Today's habits</div>
+        <div class="small">Tap to toggle (0 → ½ → 1)</div>
+      </div>
+      <ul id="habits" class="grid" style="gap:8px; list-style:none; padding:0; margin:0;"></ul>
+      <div class="small" style="margin-top:8px;">Habits auto-reset at midnight on your device.</div>
+    </section>
+
+    <section class="grid grid-3" style="margin-top:12px;">
+      <div class="card">
+        <div class="row" style="justify-content: space-between;">
+          <div style="font-weight:600">Weight</div>
+          <button class="btn primary" id="saveWeight">Save</button>
+        </div>
+        <input id="weight" type="text" placeholder="kg">
+        <div class="small" style="margin-top:6px;">Goal: -5 kg from 105.6 kg.</div>
+      </div>
+      <div class="card">
+        <div style="font-weight:600">Calories</div>
+        <input id="calories" type="number" placeholder="kcal">
+        <div class="small" style="margin-top:6px;">Track in CalAI, paste calories here for history.</div>
+      </div>
+      <div class="card">
+        <div style="font-weight:600">Social minutes</div>
+        <input id="social" type="number" placeholder="mins">
+        <div class="small" style="margin-top:6px;">Cap is 30 mins after day 30.</div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:12px;">
+      <div style="font-weight:600; margin-bottom:6px;">Notes / reflections</div>
+      <textarea id="notes" placeholder="How did today go?"></textarea>
+    </section>
+
+    <section class="card" style="margin-top:12px;">
+      <div style="font-weight:600; margin-bottom:6px;">Streaks</div>
+      <div id="streakGrid" class="grid" style="grid-template-columns: repeat(2, 1fr);"></div>
+    </section>
+
+    <div class="footer">Built for your Winter Arc. Tip: Add to Home Screen on your phone for quick access.</div>
+  </div>
+
+  <!-- Settings modal -->
+  <div id="settingsModal" class="container hidden" style="position:fixed; inset:0; display:grid; place-items:center; background: rgba(0,0,0,.25);">
+    <div class="modal" style="width: 92%; max-width: 560px;">
+      <div class="row" style="justify-content: space-between; margin-bottom:10px;">
+        <div style="font-weight:600">Settings</div>
+        <button class="btn" id="closeSettings">Close</button>
+      </div>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div>
+          <div class="small">Start date</div>
+          <input id="startDate" type="date">
+        </div>
+        <div>
+          <div class="small">Check-in times (comma separated)</div>
+          <input id="checkins" type="text">
+        </div>
+        <label class="row"><input id="triState" type="checkbox"> <span>Use partial credit (0.5)</span></label>
+        <label class="row"><input id="reminders" type="checkbox"> <span>Device notifications</span></label>
+      </div>
+      <div class="row" style="justify-content: flex-end; margin-top:10px;">
+        <button class="btn primary" id="saveSettings">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
